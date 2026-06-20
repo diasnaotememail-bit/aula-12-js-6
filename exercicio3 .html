@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist: Code of Abs Plus - Dia 7</title>
+    <style>
+        body { font-family: sans-serif; max-width: 500px; margin: 20px auto; padding: 0 20px; }
+        h1 { color: #333; }
+        .exercise-item { 
+            padding: 15px; 
+            margin: 10px 0; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            display: flex; 
+            align-items: center; 
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .exercise-item:hover { background: #f9f9f9; }
+        input[type="checkbox"] { transform: scale(1.5); margin-right: 15px; }
+        .completed { text-decoration: line-through; color: #888; }
+    </style>
+</head>
+<body>
+
+    <h1>Code of Abs Plus: Dia 7</h1>
+    <p>Marque os exercícios conforme você os concluir:</p>
+
+    <div class="exercise-list">
+        <label class="exercise-item"><input type="checkbox"> 10 Side leg raises</label>
+        <label class="exercise-item"><input type="checkbox"> 10 Front leg raises</label>
+        <label class="exercise-item"><input type="checkbox"> 10 Back leg raises</label>
+        <label class="exercise-item"><input type="checkbox"> 10 Knee-to-elbows</label>
+        <label class="exercise-item"><input type="checkbox"> 10 Side bends</label>
+    </div>
+
+    <script>
+        // Adiciona efeito visual ao marcar
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    this.parentElement.classList.add('completed');
+                } else {
+                    this.parentElement.classList.remove('completed');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

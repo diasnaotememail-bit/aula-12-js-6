@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cadastro de Carro - Estacionamento</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;max-width:800px;margin:2rem auto;padding:1rem}
+    label{display:block;margin:0.4rem 0}
+    input, button{font-size:1rem;padding:0.4rem}
+    table{width:100%;border-collapse:collapse;margin-top:1rem}
+    th,td{border:1px solid #ccc;padding:0.5rem;text-align:left}
+    th{background:#f0f0f0}
+  </style>
+</head>
+<body>
+  <h1>Entrada de Carro (Estacionamento)</h1>
+
+  <form id="carroForm">
+    <label>Placa:
+      <input type="text" id="placa" required>
+    </label>
+
+    <label>Marca:
+      <input type="text" id="marca" required>
+    </label>
+
+    <label>Modelo:
+      <input type="text" id="modelo" required>
+    </label>
+
+    <button type="submit">Registrar entrada</button>
+  </form>
+
+  <table aria-label="Tabela de entradas">
+    <thead>
+      <tr>
+        <th>Horário entrada</th>
+        <th>Placa</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+      </tr>
+    </thead>
+    <tbody id="tabelaCorpo">
+    </tbody>
+  </table>
+
+  <script>
+    const form = document.getElementById('carroForm');
+    const tabelaCorpo = document.getElementById('tabelaCorpo');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const placa = document.getElementById('placa').value.trim();
+      const marca = document.getElementById('marca').value.trim();
+      const modelo = document.getElementById('modelo').value.trim();
+
+      if(!placa || !marca || !modelo){
+        alert('Preencha todos os campos.');
+        return;
+      }
+
+      const entrada = new Date(); 
+      const carro = {
+        placa: placa,
+        marca: marca,
+        modelo: modelo,
+        entrada: entrada
+      };
+
+      adicionarNaTabela(carro);
+      form.reset();
+      document.getElementById('placa').focus();
+    });
+
+    function formatHorario(date){
+      return date.toLocaleString('pt-BR');
+    }
+
+    function adicionarNaTabela(carro){
+      const tr = document.createElement('tr');
+      const tdHora = document.createElement('td');
+      const tdPlaca = document.createElement('td');
+      const tdMarca = document.createElement('td');
+      const tdModelo = document.createElement('td');
+
+      tdHora.textContent = formatHorario(carro.entrada);
+      tdPlaca.textContent = carro.placa;
+      tdMarca.textContent = carro.marca;
+      tdModelo.textContent = carro.modelo;
+
+      tr.appendChild(tdHora);
+      tr.appendChild(tdPlaca);
+      tr.appendChild(tdMarca);
+      tr.appendChild(tdModelo);
+
+      tabelaCorpo.appendChild(tr);
+    }
+  </script>
+</body>
+</html>
